@@ -1,0 +1,9 @@
+# Copy this file to terraform.tfvars and fill in. terraform.tfvars is gitignored.
+
+hcloud_token       = "PASTE_YOUR_HETZNER_API_TOKEN"
+project            = "vibebox-1"
+ssh_public_key     = "ssh-ed25519 AAAA... your.email@example.com" # the single line from ~/.ssh/id_ed25519.pub
+admin_ip_cidr      = "203.0.113.7/32"                             # temporary bootstrap SSH source
+public_ssh_enabled = true                                         # set false after SECURITY-SETUP.md checks
+server_type        = "cx23"                                       # cx23 cheap EU / cpx11 cheap US / cx32 prod / cax11 ARM
+location           = "nbg1"                                       # nbg1/fsn1 EU-central (required for cx23) / hel1 EU / ash/hil US

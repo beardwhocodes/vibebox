@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You're in — Vibebox</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<style>
+:root { --bg:#0a0a0a; --bg-alt:#111; --fg:#f5f5f5; --muted:#9a9a9a; --dim:#6a6a6a; --line:#222; --accent:#ff6b35; --accent-dim:#ff6b3522; --green:#4ade80; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
+.wrap { max-width:640px; margin:0 auto; padding:5rem 1.5rem; }
+.check { width:64px; height:64px; border-radius:50%; background:var(--accent-dim); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:2rem; margin-bottom:1.5rem; }
+h1 { font-size:2.1rem; letter-spacing:-0.02em; margin:0 0 0.75rem; }
+.lead { font-size:1.15rem; color:#d4d4d4; margin:0 0 2rem; }
+a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+.steps { background:var(--bg-alt); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.6rem; margin:0 0 2rem; }
+.steps h2 { font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin:0 0 1rem; }
+.steps ol { margin:0; padding-left:1.3rem; } .steps li { margin-bottom:0.7rem; color:#cfcfcf; }
+.steps li:last-child { margin-bottom:0; }
+.btn { display:inline-block; background:var(--accent); color:#0a0a0a; padding:0.8rem 1.3rem; border-radius:6px; font-weight:600; font-size:0.95rem; margin:0 0.5rem 0.5rem 0; }
+.btn:hover { opacity:0.94; text-decoration:none; }
+.btn.secondary { background:transparent; border:1px solid var(--line); color:var(--fg); }
+code { background:#131313; padding:0.1rem 0.4rem; border-radius:4px; font-size:0.85em; font-family:ui-monospace,Menlo,monospace; }
+.cross { margin-top:2.5rem; padding:1.1rem 1.3rem; background:var(--bg-alt); border:1px solid var(--line); border-radius:10px; color:var(--muted); font-size:0.92rem; }
+.cross strong { color:var(--fg); }
+footer { margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--line); color:var(--muted); font-size:0.85rem; }
+footer a { color:var(--muted); }
+:root[data-theme="light"] {
+  --bg:#ffffff; --bg-alt:#f6f6f8; --fg:#1a1a1e;
+  --muted:#56565f; --dim:#9595a0; --line:#e7e7ec;
+  --accent:#ea580c; --accent-dim:#ea580c14; --green:#16a34a; --red:#dc2626;
+}
+:root[data-theme="light"] .btn:not(.secondary) { color:#ffffff; }
+:root[data-theme="light"] code { background:#f0f0f4; color:#27272a; }
+:root[data-theme="light"] .lead { color:#3f3f46; }
+:root[data-theme="light"] .steps li { color:#3f3f46; }
+.theme-toggle { position:fixed; bottom:1rem; right:1rem; z-index:60; width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; padding:0; background:transparent; border:0; border-radius:8px; font-size:0.9rem; line-height:1; cursor:pointer; opacity:0.35; filter:grayscale(1); transition:opacity .15s; }
+.theme-toggle:hover { opacity:0.8; }
+</style>
+<script>(function(){try{var c=localStorage.getItem('theme');var t=c||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+</head>
+<body>
+<button class="theme-toggle fixed" type="button" aria-label="Toggle light or dark theme" onclick="toggleTheme()">🌙</button>
+<div class="wrap">
+  <div class="check">✓</div>
+  <h1>You're in. Welcome to Vibebox.</h1>
+  <p class="lead">Payment confirmed — thank you. Your hardened, agent-ready box is ~5 minutes away.</p>
+
+  <div class="steps">
+    <h2>What happens next</h2>
+    <ol>
+      <li><strong>Check your email.</strong> Polar sends a <strong>GitHub invite</strong> to the private repo <code>beardwhocodes/vibebox</code> at the address you checked out with — usually within a few minutes. Accept it.</li>
+      <li><strong>Clone the repo</strong> and open <code>QUICKSTART.md</code> — hand it to Claude Code and it drives Packer → Terraform → the Cloudflare tunnel for you.</li>
+      <li><strong>Configure your keys</strong>, run <code>bash vibebox.sh</code>, and complete the security checks. The deadman timer can revert the host firewall during bootstrap.</li>
+    </ol>
+  </div>
+
+  <a href="https://github.com/beardwhocodes/vibebox" class="btn">Open the repo →</a>
+  <a href="https://beardwho.codes" class="btn secondary">Back to Vibebox</a>
+
+  <div class="cross">
+    ⚕️ <strong>Want a personal AI agent, not just a dev box?</strong> Our sibling kit <strong>hermesbox</strong> runs the Nous Hermes agent on a hardened box you own — reachable from your phone over Telegram, bring your own model. <a href="https://hermes.beardwho.codes">Check out hermesbox →</a>
+  </div>
+
+  <footer>
+    <p>Didn't get the GitHub invite within ~15 min? Email <span class="eml" data-user="help" data-domain="beardwho.codes">us</span><noscript> at help [at] beardwho [dot] codes</noscript> with your order — we'll sort it fast.</p>
+    <p>Vibebox · Inspired by <a href="https://x.com/levelsio">@levelsio</a>'s publicly shared workflow. Not affiliated.</p>
+  </footer>
+</div>
+<script>function toggleTheme(){var r=document.documentElement,t=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t);}catch(e){}setIcon();}function setIcon(){var i=document.documentElement.getAttribute('data-theme')==='light'?'☀️':'🌙';document.querySelectorAll('.theme-toggle').forEach(function(b){b.textContent=i;});}setIcon();</script>
+<script>(function(){document.querySelectorAll('.eml').forEach(function(e){var a=e.dataset.user+String.fromCharCode(64)+e.dataset.domain,k=document.createElement('a');k.href='mailto:'+a;k.textContent=a;e.replaceWith(k);});})();</script>
+</body>
+</html>

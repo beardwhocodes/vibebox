@@ -1,0 +1,3 @@
+# https://beardwho.codes
+User-agent: *
+Allow: /

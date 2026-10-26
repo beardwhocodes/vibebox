@@ -1,0 +1,34 @@
+# --- secrets (NEVER commit) -------------------------------------------------
+config.env
+terraform/terraform.tfvars
+terraform/terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+
+# --- terraform state + cache -----------------------------------------------
+terraform/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+# (we DO commit .terraform.lock.hcl — keeps provider versions pinned)
+
+# --- packer outputs --------------------------------------------------------
+packer/manifest.json
+packer/packer_cache/
+packer/.packer.d/
+
+# --- local app data --------------------------------------------------------
+*.db
+*.db-wal
+*.db-shm
+
+# --- wrangler / Pages local cache ------------------------------------------
+.wrangler/
+
+# --- editor / OS noise ----------------------------------------------------
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~

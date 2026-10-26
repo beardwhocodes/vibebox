@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vibebox — ship side projects, not firewalls</title>
+<meta name="description" content="Hardened, AI-ready Hetzner VPS in 5 minutes. ~$7/mo all-in. The @levelsio setup, debugged on real hardware.">
+<meta property="og:title" content="Vibebox — ship side projects, not firewalls">
+<meta property="og:description" content="Hardened, AI-ready Hetzner VPS in 5 minutes. ~$7/mo all-in.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://beardwho.codes">
+<meta property="og:site_name" content="Vibebox">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://beardwho.codes/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ship the side project. Not the firewall. — Vibebox">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vibebox — ship side projects, not firewalls">
+<meta name="twitter:description" content="Hardened, AI-ready Hetzner VPS in 5 minutes. ~$7/mo all-in.">
+<meta name="twitter:image" content="https://beardwho.codes/og.png">
+<meta name="twitter:image:alt" content="Ship the side project. Not the firewall. — Vibebox">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg-alt: #111;
+  --fg: #f5f5f5;
+  --muted: #9a9a9a;
+  --dim: #8a8a8a;
+  --line: #222;
+  --accent: #ff6b35;
+  --accent-dim: #ff6b3522;
+  --green: #4ade80;
+  --red: #f87171;
+  --max: 880px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(10,10,10,0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+nav .nav-inner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0.85rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+nav .brand { font-weight: 600; letter-spacing: -0.01em; }
+nav .brand .dot { color: var(--accent); }
+nav .nav-buy { display: flex; align-items: center; gap: 0.85rem; }
+nav .nav-buy .pricetag { font-size: 0.85rem; color: var(--muted); }
+nav .nav-buy .pricetag s { color: var(--dim); }
+nav .nav-buy .pricetag code { background: var(--accent-dim); color: var(--accent); padding: 0.05rem 0.35rem; border-radius: 3px; }
+@media (max-width: 520px) { nav .nav-buy .pricetag { display: none; } }
+nav .nav-left { display: flex; align-items: center; gap: 1.1rem; }
+nav .nav-cross { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+nav .nav-cross:hover { color: var(--accent); text-decoration: none; }
+@media (max-width: 600px) { nav .nav-cross { display: none; } }
+.gowild { display:flex; gap:0.55rem 1rem; align-items:center; justify-content:center; flex-wrap:wrap; padding:0.6rem 1rem; font-size:0.92rem; font-weight:500; color:#fff !important; text-decoration:none; text-align:center; background:linear-gradient(90deg,#ff2e97,#8b5cff,#2bd1ff,#ff2e97); background-size:300% auto; animation:gwflow 8s linear infinite; }
+.gowild:hover { text-decoration:none; }
+.gowild b { font-weight:700; }
+.gowild .gw-cta { font-family:ui-monospace,SF Mono,Menlo,monospace; font-weight:700; background:#0a0a0a; color:#fff; padding:0.22rem 0.75rem; border-radius:999px; white-space:nowrap; transition:transform 0.15s ease; }
+.gowild:hover .gw-cta { transform:scale(1.07); }
+@keyframes gwflow { to { background-position:300% center; } }
+
+main { max-width: var(--max); margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+section { margin-top: 4.5rem; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.05; margin: 0 0 1rem; letter-spacing: -0.025em; }
+h1 .strike {
+  color: var(--dim);
+  position: relative;
+  display: inline-block;
+}
+h1 .strike::after {
+  content: ""; position: absolute; left: -0.05em; right: -0.05em;
+  top: 53%; height: 5px; background: var(--accent);
+  transform: rotate(-1.3deg);
+  border-radius: 2px;
+}
+h2 { font-size: 1.65rem; margin: 0 0 0.6rem; letter-spacing: -0.01em; }
+h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+p { margin: 0 0 1rem; }
+ul, ol { padding-left: 1.4rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.4rem; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+p a { text-decoration: underline; } /* inline prose links distinguishable beyond color (WCAG 1.4.1) */
+.muted { color: var(--muted); }
+.lead { font-size: 1.2rem; color: #d4d4d4; margin: 1rem 0 2rem; max-width: 640px; }
+.lead strong { color: var(--fg); }
+
+.hero { padding: 1rem 0 1rem; }
+.tag {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: 0.85rem; color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+.tag .pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.45); }
+  70%  { box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+  100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent); color: #0a0a0a;
+  padding: 0.85rem 1.4rem;
+  border-radius: 6px;
+  font-weight: 600; font-size: 0.95rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+}
+.btn:hover { opacity: 0.94; text-decoration: none; transform: translateY(-1px); }
+.btn.secondary { background: transparent; border: 1px solid var(--line); color: var(--fg); }
+.btn.sm { padding: 0.5rem 0.95rem; font-size: 0.85rem; }
+
+.terminal {
+  margin: 1.75rem 0 0;
+  background: #0d0d0d;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: ui-monospace, SF Mono, Menlo, monospace;
+  font-size: 0.86rem;
+}
+.terminal .bar {
+  background: #1a1a1a;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.terminal .bar .tdot { width: 10px; height: 10px; border-radius: 50%; background: #333; }
+.terminal .bar .tdot.r { background: #ff5f57; }
+.terminal .bar .tdot.y { background: #febc2e; }
+.terminal .bar .tdot.g { background: #28c840; }
+.terminal .bar .title { margin-left: 0.6rem; color: var(--dim); font-size: 0.78rem; }
+.terminal .body { padding: 0.95rem 1.1rem; color: #d4d4d4; overflow-x: auto; line-height: 1.55; }
+.terminal .body .line { white-space: nowrap; }
+.terminal .prompt { color: var(--accent); user-select: none; }
+.terminal .ar { color: var(--accent); }
+.terminal .ok { color: var(--green); }
+.terminal .dim { color: var(--dim); }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; }
+@media (max-width: 640px) { .split { grid-template-columns: 1fr; } }
+.col {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.4rem 1.5rem;
+}
+.col.bad { border-color: #3a1a1a; }
+.col.good { border-color: #1a3a2a; }
+.col h3 { margin-top: 0; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.col.bad h3 { color: var(--red); }
+.col.good h3 { color: var(--green); }
+.col ul { list-style: none; padding-left: 0; margin: 0; }
+.col li { padding: 0.5rem 0 0.5rem 1.5rem; color: #c0c0c0; border-bottom: 1px dashed var(--line); position: relative; }
+.col li:last-child { border-bottom: none; }
+.col.bad li::before { content: "✗"; color: var(--red); position: absolute; left: 0; }
+.col.good li::before { content: "✓"; color: var(--green); position: absolute; left: 0; }
+.col .punch {
+  margin-top: 0.9rem; padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+  font-weight: 600; font-size: 1.05rem;
+}
+.col.bad .punch { color: var(--red); }
+.col.good .punch { color: var(--green); }
+
+.inside {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.15rem 1.2rem;
+}
+.card .ico { font-size: 1.35rem; margin-bottom: 0.45rem; }
+.card strong { display: block; margin-bottom: 0.3rem; color: var(--fg); font-size: 0.95rem; }
+.card p { font-size: 0.875rem; color: var(--muted); margin: 0; line-height: 1.5; }
+
+.traps {
+  background: var(--bg-alt);
+  border: 1px solid #3a1a1a;
+  border-radius: 8px;
+  padding: 1.3rem 1.5rem;
+  margin-top: 1.25rem;
+}
+.traps ul { list-style: none; padding-left: 0; margin: 0; }
+.traps li { padding: 0.55rem 0 0.55rem 1.6rem; color: #c0c0c0; border-bottom: 1px dashed var(--line); position: relative; }
+.traps li:last-child { border-bottom: none; }
+.traps li::before { content: "↯"; color: var(--red); position: absolute; left: 0; font-weight: 600; }
+.traps li strong { color: var(--fg); font-weight: 500; }
+
+table { width: 100%; border-collapse: collapse; margin: 1.25rem 0 0; }
+th, td { padding: 0.7rem 0.75rem; text-align: left; border-bottom: 1px solid var(--line); }
+th { font-weight: 500; color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+td.right, th.right { text-align: right; }
+tfoot td { font-weight: 700; color: var(--accent); border-bottom: none; font-size: 1.05rem; }
+
+.tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; }
+@media (max-width: 640px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.6rem 1.5rem;
+}
+.tier.pro { border-color: var(--accent); position: relative; box-shadow: 0 0 0 3px var(--accent-dim); }
+.tier.pro::before {
+  content: "MOST POPULAR";
+  position: absolute; top: -0.65rem; right: 1rem;
+  background: var(--accent); color: #0a0a0a;
+  font-size: 0.68rem; font-weight: 700;
+  padding: 0.18rem 0.7rem; border-radius: 999px;
+  letter-spacing: 0.06em;
+}
+.tier h3 { margin-top: 0; font-size: 1.2rem; }
+.tier .price { font-size: 2.3rem; font-weight: 700; margin: 0.3rem 0 0.2rem; letter-spacing: -0.02em; }
+.tier .price small { font-size: 0.9rem; color: var(--muted); font-weight: 400; margin-left: 0.2rem; }
+.tier .was { color: var(--dim); text-decoration: line-through; font-size: 1.1rem; margin-right: 0.5rem; font-weight: 500; }
+.tier .save { color: var(--green); font-size: 0.85rem; margin-bottom: 1.25rem; }
+.tier ul { list-style: none; padding-left: 0; margin-bottom: 1.5rem; }
+.tier li { padding-left: 1.4em; text-indent: -1.4em; margin-bottom: 0.5rem; color: #cfcfcf; }
+.tier li::before { content: "✓ "; color: var(--accent); }
+.tier .btn { width: 100%; text-align: center; margin: 0; }
+
+.refund { text-align: center; margin: 1.25rem 0 0; font-size: 0.85rem; color: var(--muted); }
+.refund code { background: var(--accent-dim); color: var(--accent); }
+
+.faq-item { border-top: 1px solid var(--line); padding: 1.1rem 0; }
+.faq-item:last-of-type { border-bottom: 1px solid var(--line); }
+.faq-item h3 { margin: 0 0 0.4rem; }
+.faq-item p { margin-bottom: 0; color: var(--muted); }
+
+.cta-block {
+  margin: 4.5rem 0 0;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(135deg, var(--bg-alt) 0%, #1a0e07 100%);
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  text-align: center;
+}
+.cta-block h2 { margin: 0 0 0.5rem; font-size: 1.8rem; }
+.cta-block p { color: var(--muted); margin-bottom: 1.5rem; }
+
+footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+footer a { color: var(--muted); }
+
+code { background: #131313; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.85em; font-family: ui-monospace, SF Mono, Menlo, monospace; }
+
+.proof-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: 0.85rem;
+  font-size: 0.85rem; color: var(--muted);
+}
+.proof-link .pdot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+:root[data-theme="light"] {
+  --bg:#ffffff; --bg-alt:#f6f6f8; --fg:#1a1a1e;
+  --muted:#56565f; --dim:#9595a0; --line:#e7e7ec;
+  --accent:#ea580c; --accent-dim:#ea580c14; --green:#16a34a; --red:#dc2626;
+}
+:root[data-theme="light"] .btn:not(.secondary) { color:#ffffff; }
+:root[data-theme="light"] code { background:#f0f0f4; color:#27272a; }
+:root[data-theme="light"] .lead { color:#3f3f46; }
+:root[data-theme="light"] nav { background:rgba(255,255,255,0.85); }
+:root[data-theme="light"] .col li, :root[data-theme="light"] .tier li, :root[data-theme="light"] .traps li { color:#3f3f46; }
+:root[data-theme="light"] .col.bad { border-color:#f3c9c9; } :root[data-theme="light"] .col.good { border-color:#c3e6d2; }
+:root[data-theme="light"] .traps { border-color:#f3c9c9; }
+:root[data-theme="light"] .tier.pro::before { color:#ffffff; }
+:root[data-theme="light"] .cta-block { background:linear-gradient(135deg, var(--bg-alt) 0%, #fff1e6 100%); }
+:root[data-theme="light"] .chat { background:#f4f4f5; }
+:root[data-theme="light"] .bubble.bot { background:#e7e7ec; color:#1a1a1e; }
+:root[data-theme="light"] .terminal { background:#f4f4f6; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+:root[data-theme="light"] .terminal .bar { background:#e8e8ee; border-bottom-color:#dcdce3; }
+:root[data-theme="light"] .terminal .bar .title { color:#8a8a93; }
+:root[data-theme="light"] .terminal .body { color:#27272a; }
+:root[data-theme="light"] .terminal .prompt, :root[data-theme="light"] .terminal .ar { color:#ea580c; }
+:root[data-theme="light"] .terminal .ok { color:#16a34a; }
+:root[data-theme="light"] .terminal .dim { color:#9aa0ad; }
+.theme-toggle { position:fixed; bottom:1rem; right:1rem; z-index:60; width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; padding:0; background:transparent; border:0; border-radius:8px; font-size:0.9rem; line-height:1; cursor:pointer; opacity:0.35; filter:grayscale(1); transition:opacity .15s; }
+.theme-toggle:hover { opacity:0.8; }
+</style>
+<script>(function(){try{var c=localStorage.getItem('theme');var t=c||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+</head>
+<body>
+
+<a class="gowild" href="https://vibebox.beardwho.codes/landing/">
+  <span>psst — there's an <b>unhinged</b> version of this page.</span>
+  <span class="gw-cta">go wild →</span>
+</a>
+
+<button class="theme-toggle" type="button" aria-label="Toggle light or dark theme" onclick="toggleTheme()">🌙</button>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <span class="brand">vibebox<span class="dot">.</span></span>
+      <a class="nav-cross" href="https://hermes.beardwho.codes">hermesbox ↗</a>
+    </div>
+    <div class="nav-buy">
+      <span class="pricetag">$9.99</span>
+      <a href="#pricing" class="btn sm">Get it</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero">
+  <span class="tag"><span class="pulse"></span> v0.2 · field-validated on real hardware</span>
+  <h1>Ship the side project.<br><span class="strike">Not the firewall.</span></h1>
+  <p class="lead">A hardened, AI-ready Hetzner box in <strong>~5 minutes</strong> — Tailscale, Cloudflare tunnel, Claude Code, Litestream ready for configuration, zero public ports. The <a href="https://x.com/levelsio">@levelsio</a> "vibe coding on a server" stack — packaged and debugged on real hardware. <strong>~$7/month, all in.</strong></p>
+  <div>
+    <a href="#pricing" class="btn">Get Vibebox — $9.99</a>
+    <a href="#what" class="btn secondary">What's inside ↓</a>
+  </div>
+  <a href="https://vibebox.beardwho.codes" class="proof-link"><span class="pdot"></span>See a live Vibebox running →</a>
+
+  <div class="terminal">
+    <div class="bar">
+      <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+      <span class="title">root@vibebox-1 — fresh Hetzner CX23</span>
+    </div>
+    <div class="body">
+      <div class="line"><span class="prompt">$</span> bash vibebox.sh</div>
+      <div class="line"><span class="ar">==&gt;</span> Hardening SSH (key-only)</div>
+      <div class="line"><span class="ar">==&gt;</span> Installing Tailscale</div>
+      <div class="line"><span class="ar">==&gt;</span> Firewall up — deadman armed (10 min)</div>
+      <div class="line"><span class="ar">==&gt;</span> Cloudflare tunnel: outbound only, no inbound ports</div>
+      <div class="line"><span class="ar">==&gt;</span> Claude Code installed</div>
+      <div class="line"><span class="ar">==&gt;</span> App live at https://yourdomain.tld</div>
+      <div class="line"><span class="ok">  ✓</span> Done in 4m 51s. <span class="dim"># your Saturday is yours again</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <h2>Even the install is vibe-coded.</h2>
+  <p class="lead muted" style="margin-top:0.25rem;">Don't want to type the commands? Don't. Generate three auth tokens (Hetzner, Cloudflare, Tailscale — about 5 minutes in browser tabs), paste a prompt into Claude Code (or whatever agent you already use), and it drives the entire kit — Packer, Terraform, the Cloudflare API — directly. You confirm three safety gates along the way. <strong>Total wall time: ~10 minutes.</strong></p>
+
+  <div class="terminal">
+    <div class="bar">
+      <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+      <span class="title">your laptop — Claude Code on the vibebox repo</span>
+    </div>
+    <div class="body">
+      <div class="line"><span class="prompt">you:</span> Read CLAUDE.md and set up Vibebox for me.</div>
+      <div class="line"><span class="dim">      &nbsp;HCLOUD_TOKEN, TS_AUTHKEY, CLOUDFLARE_API_TOKEN are set.</span></div>
+      <div class="line">&nbsp;</div>
+      <div class="line"><span class="ar">claude:</span> Found existing vibe-coding snapshot. Skipping Packer.</div>
+      <div class="line"><span class="ar">claude:</span> About to <span class="ok">terraform apply</span> (creates CX23, ~$5/mo). OK?</div>
+      <div class="line"><span class="prompt">you:</span> yes</div>
+      <div class="line"><span class="ar">claude:</span> Box at 91.98.x.x. SSHing in for lockdown…</div>
+      <div class="line"><span class="ar">claude:</span> Firewall up, deadman armed. Open new terminal → ssh root@vibebox-1.</div>
+      <div class="line"><span class="prompt">you:</span> verified</div>
+      <div class="line"><span class="ar">claude:</span> Creating tunnel + DNS via CF API…</div>
+      <div class="line"><span class="ok">  ✓</span> Public web live at <span class="ar">https://vibebox.yourdomain.tld</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Two ways to spend Saturday.</h2>
+  <p class="muted">You wanted to ship a side project. Here's where the next 6 hours go.</p>
+  <div class="split">
+    <div class="col bad">
+      <h3>Without vibebox</h3>
+      <ul>
+        <li>Google "harden Ubuntu SSH 2026"</li>
+        <li>Fight ufw, accidentally lock yourself out, rebuild the box</li>
+        <li>Cloudflare's "install command" hangs — it was for a different machine</li>
+        <li>Litestream's release URL 404s. Why is the arch <code>x86_64</code> and not <code>amd64</code>?</li>
+        <li><code>needrestart</code> hangs <code>apt-get</code> forever. No error.</li>
+        <li>It's 11pm. Zero product code written.</li>
+      </ul>
+      <p class="punch">Saturday: gone.</p>
+    </div>
+    <div class="col good">
+      <h3>With vibebox</h3>
+      <ul>
+        <li>Paste two auth keys into <code>config.env</code></li>
+        <li>Run <code>bash vibebox.sh</code></li>
+        <li>Deadman timer makes lockout physically impossible</li>
+        <li>Claude Code waiting on the box, ~5 minutes later</li>
+        <li>Open your editor</li>
+        <li>Actually build the thing</li>
+      </ul>
+      <p class="punch">Saturday: still yours.</p>
+    </div>
+  </div>
+</section>
+
+<section id="what">
+  <h2>What's in the box.</h2>
+  <p class="muted">One private GitHub repo. Lifetime access. MIT-licensed scripts.</p>
+  <div class="inside">
+    <div class="card">
+      <div class="ico">🛡️</div>
+      <strong>vibebox.sh</strong>
+      <p>~400-line idempotent bash. Deadman timer makes it physically impossible to lock yourself out.</p>
+    </div>
+    <div class="card">
+      <div class="ico">📦</div>
+      <strong>Packer template</strong>
+      <p>Bakes a Hetzner image. New boxes boot in <strong>~40 seconds</strong>, not 5 minutes.</p>
+    </div>
+    <div class="card">
+      <div class="ico">⚙️</div>
+      <strong>Terraform module</strong>
+      <p>One <code>terraform apply</code> per box. Repeatable, disposable infrastructure.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🤖</div>
+      <strong>Claude Prompt Pack</strong>
+      <p>8 battle-tested prompts: security audit, scaffold, SQLite migration with backup-first safety, more.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🥞</div>
+      <strong>PHP + SQLite + jQuery starter</strong>
+      <p>The "dumb stack" agents make fewest mistakes on. Ships with a pre-tuned <code>CLAUDE.md</code>.</p>
+    </div>
+    <div class="card">
+      <div class="ico">📖</div>
+      <strong>GUIDE.md</strong>
+      <p>Full walkthrough. Mobile coding via Termius+Mosh+tmux. Honest "when NOT to do this."</p>
+    </div>
+    <div class="card">
+      <div class="ico">💾</div>
+      <strong>Litestream backups</strong>
+      <p>3-2-1 SQLite streaming to R2. Survives a wiped box. Configurable in 2 minutes.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🚀</div>
+      <strong>Launch kit</strong>
+      <p>Teaser thread + landing copy if you want to remix the kit for your own audience.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What it costs to actually run.</h2>
+  <p class="muted">We mark up none of it. Bring your own accounts.</p>
+  <table>
+    <thead><tr><th>Service</th><th>Role</th><th class="right">Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Hetzner CX23</td><td>The VPS</td><td class="right">~$5/mo</td></tr>
+      <tr><td>Cloudflare</td><td>Tunnel + DNS + Universal SSL</td><td class="right">free</td></tr>
+      <tr><td>Tailscale</td><td>Private SSH mesh</td><td class="right">free</td></tr>
+      <tr><td>Anthropic</td><td>Claude Code</td><td class="right">existing plan</td></tr>
+      <tr><td>Cloudflare Registrar</td><td>Domain (optional)</td><td class="right">~$1/mo</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="2">All in</td><td class="right">~$7/month</td></tr>
+    </tfoot>
+  </table>
+</section>
+
+<section id="pricing">
+  <h2>Pricing.</h2>
+  <p class="muted">One-time. Lifetime updates.</p>
+  <div class="tiers">
+    <div class="tier">
+      <h3>Standard</h3>
+      <div class="price">$9.99 <small>one-time</small></div>
+      <ul>
+        <li>Everything in the kit</li>
+        <li>Lifetime private-repo access</li>
+        <li>All updates pushed (<code>git pull</code>)</li>
+        <li>MIT-licensed scripts</li>
+      </ul>
+      <a href="https://buy.polar.sh/polar_cl_OUbO1OWCivAJUspHv71hnt09VtYDT6fIlveGC3VToUq" class="btn">Buy Standard — $9.99</a>
+    </div>
+    <div class="tier pro">
+      <h3>Pro</h3>
+      <div class="price">$59.99 <small>one-time</small></div>
+      <ul>
+        <li>Everything in Standard</li>
+        <li>Buyer Discord access</li>
+        <li>Priority bug-fix response (48h)</li>
+        <li>30 min async 1:1 setup help</li>
+        <li>Proactive breaking-change pings</li>
+      </ul>
+      <a href="https://buy.polar.sh/polar_cl_nciotrJddTKqhsNAw3Vs7sOMSX4pXeZwootbo3eCtE6" class="btn">Buy Pro — $59.99</a>
+    </div>
+  </div>
+  <p class="refund">14-day refund if you can't make it work. I'll try to help you debug first.</p>
+</section>
+
+<section>
+  <h2>Who's this for?</h2>
+  <div class="split">
+    <div class="col good">
+      <h3>You'll love it if</h3>
+      <ul>
+        <li>You want to ship side projects, not become a sysadmin</li>
+        <li>You're building with Claude Code and want it on a real box</li>
+        <li>You like @levelsio's "one disposable VPS per idea" workflow</li>
+        <li>You'd pay $9.99 to save a Saturday</li>
+      </ul>
+    </div>
+    <div class="col bad">
+      <h3>Skip it if</h3>
+      <ul>
+        <li>You already have your own hardened Ansible/Terraform setup</li>
+        <li>You need Kubernetes, multi-region, or HA</li>
+        <li>You don't use Cloudflare (the tunnel is load-bearing)</li>
+        <li>You enjoy debugging <code>needrestart</code> at midnight</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>FAQ.</h2>
+  <div class="faq-item">
+    <h3>Is this affiliated with @levelsio?</h3>
+    <p>No. Inspired by his publicly shared workflow. Not endorsed by him.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do I need a domain?</h3>
+    <p>Only if you want public HTTPS. Vibebox also works as a private agent-dev box accessed only over Tailscale (no domain needed). If you do want public, the guide walks you through Cloudflare Registrar for ~$10–15/yr — the only happy path.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is <code>IS_SANDBOX=1</code> a real sandbox?</h3>
+    <p>No, and the kit is explicit about this. The real safety boundary is the disposable per-project VPS plus 3-2-1 backups. The kit makes that safe and effortless — it doesn't lie about the flag.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Will this work on DigitalOcean / Linode / OVH?</h3>
+    <p>The <code>vibebox.sh</code> path works on any fresh Ubuntu 24.04 / 26.04 box with root SSH. Packer + Terraform target Hetzner specifically. Adapting to other providers is straightforward but not pre-built.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Refunds?</h3>
+    <p>14-day, no-questions. I'll try to help you debug first.</p>
+  </div>
+</section>
+
+<div class="cta-block">
+  <h2>Stop yak-shaving. Start shipping.</h2>
+  <p>Hardened, agent-ready VPS in ~5 minutes. $9.99, one-time.</p>
+  <a href="#pricing" class="btn">Get Vibebox — $9.99</a>
+</div>
+
+<p class="muted" style="text-align:center; margin-top:2rem; font-size:0.92rem;">⚕️ Want a personal AI agent on a box you own? <a href="https://hermes.beardwho.codes">hermesbox</a> — the Nous Hermes agent, hardened and reachable from your phone over Telegram.</p>
+
+<footer>
+  <p>Vibebox · Inspired by <a href="https://x.com/levelsio">@levelsio</a>'s publicly shared workflow. Not affiliated. Scripts MIT-licensed.</p>
+  <p>Questions: <span class="eml" data-user="help" data-domain="beardwho.codes">email&nbsp;us</span><noscript> (help [at] beardwho [dot] codes)</noscript></p>
+</footer>
+
+</main>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Vibebox",
+  "description": "A hardened, AI-ready Hetzner VPS in ~5 minutes. Tailscale-only SSH, Cloudflare outbound tunnel for web, Claude Code on the box, real 3-2-1 backups, lockout-proof. The @levelsio 'vibe coding on a server' stack — packaged and field-validated on real hardware.",
+  "url": "https://beardwho.codes",
+  "image": "https://beardwho.codes/og.png",
+  "brand": { "@type": "Brand", "name": "Vibebox" },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Standard",
+      "url": "https://buy.polar.sh/polar_cl_OUbO1OWCivAJUspHv71hnt09VtYDT6fIlveGC3VToUq",
+      "price": "9.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pro",
+      "url": "https://buy.polar.sh/polar_cl_nciotrJddTKqhsNAw3Vs7sOMSX4pXeZwootbo3eCtE6",
+      "price": "59.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  ]
+}
+</script>
+<script>function toggleTheme(){var r=document.documentElement,t=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t);}catch(e){}setIcon();}function setIcon(){var i=document.documentElement.getAttribute('data-theme')==='light'?'☀️':'🌙';document.querySelectorAll('.theme-toggle').forEach(function(b){b.textContent=i;});}setIcon();</script>
+<script>(function(){document.querySelectorAll('.eml').forEach(function(e){var a=e.dataset.user+String.fromCharCode(64)+e.dataset.domain,k=document.createElement('a');k.href='mailto:'+a;k.textContent=a;e.replaceWith(k);});})();</script>
+</body>
+</html>
